@@ -2,6 +2,7 @@
 
 int main() {
   int i,j,count=1,temp[4];
+  char notExec[5];
   int need_res[5][4] = {{0,0,0,0},{0,7,5,0},{1,0,0,2},{0,0,2,0},{0,6,4,2}};
   int alloc_res[5][4] = {{0,0,1,2},{1,0,0,0},{1,3,5,4},{0,6,3,2},{0,0,1,4}};
   int max_res[5][4] = {{0,0,1,2},{1,7,5,0},{2,3,5,6},{0,6,5,2},{0,6,5,6}};
@@ -18,6 +19,8 @@ int main() {
       }
       else if(need_res[i][j]>avail[j])
       {
+        notExec[i]=i + '0';
+        notExec[i+1]='';
         break;
       }
       else if(need_res[i][j]<avail[j])
@@ -36,5 +39,5 @@ int main() {
   for(i=0;i<4;i++){
     printf("%d\n",avail[i]);
   }
+  printf("%c",notExec[]);
 }
-
