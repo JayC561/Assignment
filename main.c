@@ -1,12 +1,12 @@
 #include <stdio.h>
 
 int main() {
-  int i,j,count=1,temp[4];
-  char notExec[5];
+  int i,j,count=1,temp[4];char notExec[5],temp_index;
   int need_res[5][4] = {{0,0,0,0},{0,7,5,0},{1,0,0,2},{0,0,2,0},{0,6,4,2}};
   int alloc_res[5][4] = {{0,0,1,2},{1,0,0,0},{1,3,5,4},{0,6,3,2},{0,0,1,4}};
   int max_res[5][4] = {{0,0,1,2},{1,7,5,0},{2,3,5,6},{0,6,5,2},{0,6,5,6}};
   int avail[4] = {1,5,2,0};
+  int index=0,notExec_index=0;
 
   printf("Safe Sequence is:\n");
   for(i=0;i<5;i++)
@@ -19,11 +19,11 @@ int main() {
       }
       else if(need_res[i][j]>avail[j])
       {
-        notExec[i]=i + '0';
-        notExec[i+1]='';
-        break;
+        notExec[index++]=i + '0';
+        notExec[index]='\0';
+        break;  
       }
-      else if(need_res[i][j]<avail[j])
+      else if(need_res[i][j]<=avail[j])
       {
         temp[j]=avail[j]+alloc_res[i][j];
         count++;
@@ -33,11 +33,33 @@ int main() {
         for(j=0;j<4;j++){
         avail[j]=temp[j];
         }
+        printf("Process P%d\n",i);
       }
     }
   }
-  for(i=0;i<4;i++){
-    printf("%d\n",avail[i]);
+  // for(i=0;i<4;i++){
+  //   printf("%d\n",avail[i]);
+  // }
+  notExec_index=index++;
+  index=0;
+  while(notExec[index]!='\0')
+  {
+    count=0;
+    for(i=0;i<4;i++){
+      temp_index=notExec[index];
+      if(need_res[temp_index][i]<=avail[i] || need_res[temp_index][i]==0){
+        temp[i]=avail[i]+alloc_res[temp_index][i];
+        count++;
+      }
+      else if(need_res[temp_index][i]>avail[i]){
+        notExec[notExec_index++]=temp_index;
+        break;
+      }
+    }
+    if(count==4){
+      printf("Process P%d\n",notExec[temp_index]);
+    }
+    index++;
   }
-  printf("%c",notExec[]);
 }
+
