@@ -37,30 +37,8 @@ int main() {
       }
     }
   }
-  // for(i=0;i<4;i++){
-  //   printf("%d\n",avail[i]);
-  // }
   notExec_index=index++;
   index=0;
-  // while(notExec[index]!='\0')
-  // {
-  //   count=0;
-  //   for(i=0;i<4;i++){
-  //     temp_index=notExec[index];
-  //     if(need_res[temp_index][i]<=avail[i] || need_res[temp_index][i]==0){
-  //       temp[i]=avail[i]+alloc_res[temp_index][i];
-  //       count++;
-  //     }
-  //     else if(need_res[temp_index][i]>avail[i]){
-  //       notExec[notExec_index++]=temp_index;
-  //       break;
-  //     }
-  //   }
-  //   if(count==4){
-  //     printf("Process P%d\n",notExec[index]);
-  //   }
-  //   index++;
-  // }
   while(notExec[index]!='\0'){
     printf("Process P%c not executed\nGiving resources again\n",notExec[index]);
     notExec_index=notExec[index] - '0';
