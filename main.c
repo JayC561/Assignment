@@ -62,7 +62,22 @@ int main() {
   //   index++;
   // }
   while(notExec[index]!='\0'){
-    printf("%c\n",notExec[index]);
+    printf("Process P%c not executed\nGiving resources again\n",notExec[index]);
+    notExec_index=notExec[index] - '0';
+    count=0;
+    for(i=0;i<4;i++){
+      if(avail[i]>=need_res[notExec_index][i]){
+        temp[j]=avail[j]+alloc_res[i][j];
+        count++;
+      }
+      else if(avail[i]<need_res[notExec_index][i]){
+        break;
+      }
+    }
+    if(count==4){
+      printf("Process P%c is executed",notExec[index]);
+    }
+    index++;
   }
 }
 
